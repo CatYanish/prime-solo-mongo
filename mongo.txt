@@ -1,0 +1,45 @@
+
+
+db.createCollection('orders')
+
+orders.insert({
+orderDate: new Date('2017-02-03'),
+orderTotal: 75.00,
+lineItems: [ {unitPrice: 25.00 }, 
+            {quantity: 3 },
+            {productName: 'miniature freshwater sharks' }   
+]})
+
+
+
+orders.insert({
+orderDate: new Date('2017-04-04'),
+orderTotal: 27500.00, 
+lineItems: [ {unitPrice: 27500.00 },
+              {quantity: 1 },
+              {productName: 'Abstract Painting titled "Blue", mixed media in all purple' } 
+]})
+
+
+orders.insert({
+orderDate: new Date('2017-01-02'),
+orderTotal: 500.00,
+lineItems: [ ]  })
+            
+
+orders.find().pretty()
+
+
+orders.find({orderDate: {$gt: new Date('2017-01-31')}}).pretty()
+
+
+orders.update({orderDate: new Date('2017-02-03')},{$set:{ orderTotal: '63 dollars'}}) 
+
+
+orders.update({orderDate: new Date('2017-04-04')},
+{$push: {lineItems: {unitPrice: 450,quantity: 2, productName: 'Set of matching Qing Dynasty drinking vessels from Gansu province'}} })
+
+
+orders.update({orderDate: new Date('2017-01-02')},{$set: {"lineItems.1.quantity":2}  })
+orders.update({orderDate: new Date('2017-01-02')},{$set: {"lineItems.2.productName":"transistor radio"}  })
+            
