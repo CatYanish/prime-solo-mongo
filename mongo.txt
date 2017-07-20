@@ -42,4 +42,7 @@ orders.update({orderDate: new Date('2017-04-04')},
 
 orders.update({orderDate: new Date('2017-01-02')},{$set: {"lineItems.1.quantity":2}  })
 orders.update({orderDate: new Date('2017-01-02')},{$set: {"lineItems.2.productName":"transistor radio"}  })
-            
+
+
+
+orders.find({$and: [{"lineItems.quantity": {$lt:10}}, {"lineItems.quantity": {$gt:2}}] })
